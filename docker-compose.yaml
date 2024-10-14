@@ -1,0 +1,27 @@
+
+version: "3"
+
+services:
+  webserver:
+    image: nginx:latest
+    restart: always
+    ports:
+      - "8080:80"  # Correct indentation and dash formatting
+    volumes:
+      - ./websites:/usr/share/nginx/html
+    depends_on:
+      - db
+    links:
+      - db
+
+  db:
+    image: mysql:latest
+    environment:
+      - MYSQL_ROOT_PASSSWORD=password
+    restart:  always
+    volumes:
+      - db_vol:/var/lib/mysql
+
+volumes:
+  db_vol:
+
